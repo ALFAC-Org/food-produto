@@ -76,4 +76,17 @@ class ConsultarItensPorCategoriaUseCaseTest {
                 .hasMessage("Categoria sem itens cadastrados");
     }
 
+    @Test
+    void deveGerarExcecao_QuandoListarItensPorCategoria_ListaNula() throws FoodProdutoException {
+        //Arrange
+        List<Item> itens = null;
+        
+        when(repositorioItemGateway.consultarItensPorCategoria(any(CategoriaItem.class))).thenReturn(itens);
+
+        //Act/Assert
+        assertThatThrownBy(() -> consultarItensPorCategoriaUseCase.execute(CategoriaItem.LANCHE))
+                .isInstanceOf(FoodProdutoException.class)
+                .hasMessage("Categoria sem itens cadastrados");
+    }
+
 }

@@ -15,7 +15,6 @@ public class AtualizarItemUseCase {
 
     public Item execute(Long id, ItemDTO item) throws FoodProdutoException {
         Item itemAtualizado = itemRepository.atualizarItem(id, item);
-
         return itemAtualizado;
     }
 

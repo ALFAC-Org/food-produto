@@ -98,6 +98,7 @@
             <scope>test</scope>
         </dependency>
         <!-- // Config para carregar automaticamente as variaveis ENV no ambiente de teste -->
+
     </dependencies>
 
     <build>

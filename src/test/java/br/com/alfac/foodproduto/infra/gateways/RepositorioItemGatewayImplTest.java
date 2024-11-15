@@ -1,5 +1,6 @@
 package br.com.alfac.foodproduto.infra.gateways;
 
+import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
 import br.com.alfac.foodproduto.core.domain.item.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
@@ -17,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -109,14 +111,111 @@ public class RepositorioItemGatewayImplTest {
         when(itemEntityMapper.toDomain(itemEntity)).thenReturn(item);
 
         //Act
-        var itemObtido = repositorioItemGateway.consultarItemPorId(randomId);
+        var itemOpcional = repositorioItemGateway.consultarItemPorId(randomId);
 
         //Assert
-        assertThat(itemObtido)
+        assertThat(itemOpcional)
             .isPresent()
             .containsSame(item);
 
+        itemOpcional.ifPresent(itemArmazenado -> {
+            assertThat(itemArmazenado.getId())
+                .isEqualTo(item.getId());
+            assertThat(itemArmazenado.getNome())
+                .isEqualTo(item.getNome());
+            assertThat(itemArmazenado.getPreco())
+                .isEqualTo(item.getPreco());
+            assertThat(itemArmazenado.getCategoria())
+                .isEqualTo(item.getCategoria());
+            });
+
         verify(itemEntityRepository, times(1)).findById(anyLong());
+        verify(itemEntityMapper, times(1)).toDomain(any(ItemEntity.class));
+    }
+
+    @Test
+    void devePermitirAtualizarItem() throws FoodProdutoException {
+        // Arrange
+        Long randomId = ItemHelper.randomId();
+        Item item = ItemHelper.criarItem();
+        item.setId(randomId);
+
+        ItemDTO itemDTO = ItemHelper.criarItemDTO(item);
+        ItemEntity itemEntity = ItemHelper.criarItemEntity(item);
+
+        when(itemEntityRepository.findById(anyLong())).thenReturn(Optional.of(itemEntity));
+        when(itemEntityRepository.save(any(ItemEntity.class))).thenReturn(itemEntity);
+        when(itemEntityMapper.toDomain(itemEntity)).thenReturn(item);
+
+        // Act
+        var itemAtualizado = repositorioItemGateway.atualizarItem(randomId, itemDTO);
+
+        // Assert
+        assertThat(itemAtualizado)
+            .isInstanceOf(Item.class)
+            .isNotNull()
+            .isEqualTo(item);
+
+        assertThat(itemAtualizado).extracting(Item::getId).isEqualTo(item.getId());
+        assertThat(itemAtualizado).extracting(Item::getNome).isEqualTo(item.getNome());
+        assertThat(itemAtualizado).extracting(Item::getPreco).isEqualTo(item.getPreco());
+        assertThat(itemAtualizado).extracting(Item::getCategoria).isEqualTo(item.getCategoria());
+        
+        verify(itemEntityRepository, times(1)).findById(anyLong());
+        verify(itemEntityRepository, times(1)).save(any(ItemEntity.class));
+        verify(itemEntityMapper, times(1)).toDomain(any(ItemEntity.class));
+    }
+
+    @Test
+    void devePermitirCadastrarItem() throws FoodProdutoException {
+        // Arrange
+        Item item = ItemHelper.criarItem();
+        ItemEntity itemEntity = ItemHelper.criarItemEntity(item);
+
+        when(itemEntityRepository.save(any(ItemEntity.class))).thenReturn(itemEntity);
+        when(itemEntityMapper.toEntity(item)).thenReturn(itemEntity);
+        when(itemEntityMapper.toDomain(itemEntity)).thenReturn(item);
+
+        // Act
+        var itemSalvo = repositorioItemGateway.cadastrarItem(item);
+
+        // Assert
+        assertThat(itemSalvo)
+            .isInstanceOf(Item.class)
+            .isNotNull()
+            .isEqualTo(item);
+
+        assertThat(itemSalvo).extracting(Item::getId).isEqualTo(item.getId());
+        assertThat(itemSalvo).extracting(Item::getNome).isEqualTo(item.getNome());
+        assertThat(itemSalvo).extracting(Item::getPreco).isEqualTo(item.getPreco());
+        assertThat(itemSalvo).extracting(Item::getCategoria).isEqualTo(item.getCategoria());
+        
+        verify(itemEntityRepository, times(1)).save(any(ItemEntity.class));
+        verify(itemEntityMapper, times(1)).toEntity(any(Item.class));
+        verify(itemEntityMapper, times(1)).toDomain(any(ItemEntity.class));
+    }
+
+    @Test
+    void devePermitiExcluirItem() throws FoodProdutoException {
+        //Arrange
+        Long randomId = ItemHelper.randomId();
+        Item item = ItemHelper.criarItem();
+        item.setId(randomId);
+        ItemEntity itemEntity = ItemHelper.criarItemEntity(item);
+
+        when(itemEntityRepository.findById(anyLong())).thenReturn(Optional.of(itemEntity));
+        when(itemEntityMapper.toDomain(itemEntity)).thenReturn(item);
+        doNothing().when(itemEntityRepository).delete(itemEntity);
+
+        //Act
+        var itemExcluido = repositorioItemGateway.excluirItem(randomId);
+
+        // Assert
+        assertThat(itemExcluido).isInstanceOf(Item.class);
+        assertThat(item.getId()).isEqualTo(itemExcluido.getId());
+
+        verify(itemEntityRepository, times(1)).findById(anyLong());
+        verify(itemEntityRepository, times(1)).delete(any(ItemEntity.class));
         verify(itemEntityMapper, times(1)).toDomain(any(ItemEntity.class));
     }
 

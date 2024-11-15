@@ -6,17 +6,29 @@ import java.util.Random;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
 import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.infra.dto.ItemRequest;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntity;
 
 public abstract class ItemHelper {
 
-    public static ItemDTO criarItemDTO() {
-        return criarItemDTO(null, null, null);
+    public static ItemRequest criarItemRequest() {
+        ItemRequest itemRequest = new ItemRequest();
+
+        itemRequest.setNome("Hamburger");
+        itemRequest.setCategoria(CategoriaItem.LANCHE);
+        itemRequest.setPreco(10);
+
+        return itemRequest;
     }
 
-    public static ItemDTO criarItemDTO(String nome, BigDecimal preco, CategoriaItem categoria) {
+    public static ItemDTO criarItemDTO() {
+        return criarItemDTO(null, null, null, null);
+    }
+
+    public static ItemDTO criarItemDTO(Long id, String nome, BigDecimal preco, CategoriaItem categoria) {
         ItemDTO itemDTO = new ItemDTO();
 
+        itemDTO.setId(id != null ? id : randomId());
         itemDTO.setNome(nome != null && !nome.isEmpty() ? nome : "Hamburger");
         itemDTO.setCategoria(categoria != null ? categoria : CategoriaItem.LANCHE);
         itemDTO.setPreco(preco != null ? preco : new BigDecimal(10));
@@ -31,6 +43,16 @@ public abstract class ItemHelper {
         itemDTO.setNome(item.getNome());
         itemDTO.setPreco(item.getPreco());
         itemDTO.setCategoria(item.getCategoria());
+
+        return itemDTO;
+    }
+
+    public static ItemDTO criarItemDTO(ItemRequest itemRequest) {
+        ItemDTO itemDTO = new ItemDTO();
+
+        itemDTO.setNome(itemRequest.getNome());
+        itemDTO.setPreco(new BigDecimal(itemRequest.getPreco()));
+        itemDTO.setCategoria(itemRequest.getCategoria());
 
         return itemDTO;
     }

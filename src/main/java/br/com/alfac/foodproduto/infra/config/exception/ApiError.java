@@ -53,24 +53,12 @@ public final class ApiError {
         return this.code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getMessage() {
         return this.message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Long getDate() {
         return this.date;
-    }
-
-    public void setDate(Long date) {
-        this.date = date;
     }
 
     public List<ApiErrorItem> getArguments() {
@@ -83,10 +71,6 @@ public final class ApiError {
 
     public Integer getStatus() {
         return this.status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public void addArguments(ApiErrorItem apiErrorItem) {

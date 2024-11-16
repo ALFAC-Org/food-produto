@@ -1,7 +1,7 @@
 package br.com.alfac.foodproduto.core.application.adapters.presenter;
 
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,6 @@ public final class ItemPresenter {
         itemDTO.setPreco(item.getPreco());
 
         return itemDTO;
-    }
-
-    public static Item mapearParaItem(ItemDTO itemDTO) {
-        Item item = new Item();
-        item.setCategoria(itemDTO.getCategoria());
-        item.setId(itemDTO.getId());
-        item.setNome(itemDTO.getNome());
-        item.setPreco(itemDTO.getPreco());
-
-        return item;
     }
 
     public static List<ItemDTO> mapearParaItemDTOList(List<Item> itemList) {

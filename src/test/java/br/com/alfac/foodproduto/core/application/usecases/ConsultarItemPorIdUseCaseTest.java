@@ -6,7 +6,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 

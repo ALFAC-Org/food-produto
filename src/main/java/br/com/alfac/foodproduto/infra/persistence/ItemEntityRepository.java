@@ -1,8 +1,9 @@
 package br.com.alfac.foodproduto.infra.persistence;
 
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 
 import java.util.List;
 

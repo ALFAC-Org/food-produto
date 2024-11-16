@@ -1,4 +1,4 @@
-package br.com.alfac.foodproduto.core.domain.item;
+package br.com.alfac.foodproduto.core.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -27,8 +27,9 @@ public class Item {
     }
 
     public BigDecimal getPreco() {
-        if (Objects.nonNull(preco)) {
-            return preco.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal preco = null;
+        if (Objects.nonNull(this.preco)) {
+            preco = this.preco.setScale(2, RoundingMode.HALF_UP);
         }
         return preco;
     }

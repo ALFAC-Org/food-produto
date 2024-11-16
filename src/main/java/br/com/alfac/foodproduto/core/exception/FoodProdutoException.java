@@ -19,30 +19,6 @@ public class FoodProdutoException extends Exception {
         this.foodErrors = null;
     }
 
-    public FoodProdutoException(final List<FoodProdutoError> foodErrors, Throwable e) {
-        super(getMessages(foodErrors), e);
-        this.foodErrors = foodErrors;
-        this.foodError = null;
-    }
-    public FoodProdutoException(FoodProdutoError foodError, Throwable e) {
-        super(foodError.getErrorMessage(), e);
-        this.foodError = foodError;
-        this.foodErrors = null;
-    }
-
-
-    public FoodProdutoException(FoodProdutoError foodError, Object... args) {
-        super(String.format(foodError.getErrorMessage(), args));
-        this.foodError = foodError;
-        this.foodErrors = null;
-    }
-
-    public FoodProdutoException(FoodProdutoError foodError, Throwable e, Object... args) {
-        super(String.format(foodError.getErrorMessage(), args), e);
-        this.foodError = foodError;
-        this.foodErrors = null;
-    }
-
     public FoodProdutoError getFoodErros() {
         return foodError;
     }

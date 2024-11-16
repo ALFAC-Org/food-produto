@@ -1,44 +1,33 @@
 package br.com.alfac.foodproduto.core.application.adapters.controller;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
-import br.com.alfac.foodproduto.core.application.adapters.presenter.ItemPresenter;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import br.com.alfac.foodproduto.core.application.usecases.ConsultarItensUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.ExcluirItemUseCase;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.application.usecases.AtualizarItemUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.CadastrarItemUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.ConsultarItemPorIdUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.ConsultarItensPorCategoriaUseCase;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
-import br.com.alfac.foodproduto.core.domain.item.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedConstruction;
-import org.mockito.MockedStatic;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ControladorItemTest {

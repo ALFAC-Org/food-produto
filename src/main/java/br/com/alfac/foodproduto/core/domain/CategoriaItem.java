@@ -1,4 +1,4 @@
-package br.com.alfac.foodproduto.core.domain.item;
+package br.com.alfac.foodproduto.core.domain;
 
 public enum CategoriaItem{
     LANCHE,

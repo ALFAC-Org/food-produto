@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.infra.dto.ItemRequest;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntity;
 

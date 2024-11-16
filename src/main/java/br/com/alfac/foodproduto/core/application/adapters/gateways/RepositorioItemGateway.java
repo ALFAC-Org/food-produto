@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.Item;
 
 public interface RepositorioItemGateway {
 

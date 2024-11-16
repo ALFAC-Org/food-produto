@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 
@@ -35,10 +35,9 @@ class ConsultarItensUseCaseTest {
     @Test
     void devePermitirListarItens() throws FoodProdutoException {
         //Arrange
-        List<Item> itens = Arrays.asList(
-                ItemHelper.criarItem(),
-                ItemHelper.criarItem()
-        );
+        Item item1 = ItemHelper.criarItem();
+        Item item2 = ItemHelper.criarItem();
+        List<Item> itens = Arrays.asList(item1, item2);
 
         when(repositorioItemGateway.consultarItens()).thenReturn(itens);
 
@@ -46,14 +45,9 @@ class ConsultarItensUseCaseTest {
         List<Item> itensObtidos = consultarItensUseCase.execute();
 
         //Assert
-        assertThat(itensObtidos).hasSize(2);
-
-        /*assertThat(itensObtidos.getContent())
-        .asList()
-        .allSatisfy(mensagem -> {
-          assertThat(mensagem).isNotNull();
-          assertThat(mensagem).isInstanceOf(Mensagem.class);
-        });*/
+        assertThat(itensObtidos)
+            .hasSize(2)
+            .containsExactlyInAnyOrder(item1, item2);
 
         verify(repositorioItemGateway, times(1)).consultarItens();
     }

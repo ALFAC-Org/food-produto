@@ -9,8 +9,8 @@ import br.com.alfac.foodproduto.core.application.usecases.ConsultarItemPorIdUseC
 import br.com.alfac.foodproduto.core.application.usecases.ConsultarItensPorCategoriaUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.ConsultarItensUseCase;
 import br.com.alfac.foodproduto.core.application.usecases.ExcluirItemUseCase;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 
 import java.util.List;

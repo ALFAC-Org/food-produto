@@ -1,6 +1,6 @@
 package br.com.alfac.foodproduto.infra.dto;
 
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

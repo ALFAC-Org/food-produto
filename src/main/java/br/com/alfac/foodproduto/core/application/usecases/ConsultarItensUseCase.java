@@ -3,7 +3,7 @@ package br.com.alfac.foodproduto.core.application.usecases;
 import java.util.List;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 
 public class ConsultarItensUseCase {

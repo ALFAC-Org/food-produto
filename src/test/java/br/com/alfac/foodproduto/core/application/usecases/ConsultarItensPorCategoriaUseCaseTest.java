@@ -8,8 +8,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
-import br.com.alfac.foodproduto.core.domain.item.Item;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 
@@ -40,10 +40,9 @@ class ConsultarItensPorCategoriaUseCaseTest {
     @Test
     void devePermitirListarItensPorCategoria() throws FoodProdutoException {
         //Arrange
-        List<Item> itens = Arrays.asList(
-                ItemHelper.criarItem(),
-                ItemHelper.criarItem()
-        );
+        Item item1 = ItemHelper.criarItem();
+        Item item2 = ItemHelper.criarItem();
+        List<Item> itens = Arrays.asList(item1, item2);
 
         when(repositorioItemGateway.consultarItensPorCategoria(any(CategoriaItem.class))).thenReturn(itens);
 
@@ -51,14 +50,9 @@ class ConsultarItensPorCategoriaUseCaseTest {
         List<Item> itensObtidos = consultarItensPorCategoriaUseCase.execute(CategoriaItem.LANCHE);
 
         //Assert
-        assertThat(itensObtidos).hasSize(2);
-
-        /*assertThat(itensObtidos.getContent())
-        .asList()
-        .allSatisfy(mensagem -> {
-          assertThat(mensagem).isNotNull();
-          assertThat(mensagem).isInstanceOf(Mensagem.class);
-        });*/
+        assertThat(itensObtidos)
+            .hasSize(2)
+            .containsExactlyInAnyOrder(item1, item2);
 
         verify(repositorioItemGateway, times(1)).consultarItensPorCategoria(any(CategoriaItem.class));
     }

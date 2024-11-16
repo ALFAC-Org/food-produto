@@ -1,8 +1,5 @@
-package br.com.alfac.foodproduto.core.exception.item;
+package br.com.alfac.foodproduto.core.exception;
 
-import br.com.alfac.foodproduto.core.exception.FoodProdutoError;
-import br.com.alfac.foodproduto.core.exception.FoodProdutoErrosImpl;
-import br.com.alfac.foodproduto.core.exception.StatusCode;
 
 public class ItemError extends FoodProdutoErrosImpl {
     public static final FoodProdutoError ITEM_NAO_ENCONTRADO = new ItemError("001", "Item não encontrado", StatusCode.NOT_FOUND);

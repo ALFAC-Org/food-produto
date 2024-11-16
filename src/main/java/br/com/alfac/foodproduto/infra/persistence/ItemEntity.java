@@ -1,12 +1,13 @@
 package br.com.alfac.foodproduto.infra.persistence;
 
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 
 @Entity
 @Table(name = "item")

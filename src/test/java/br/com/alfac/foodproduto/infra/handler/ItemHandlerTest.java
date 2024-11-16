@@ -2,9 +2,9 @@ package br.com.alfac.foodproduto.infra.handler;
 
 import br.com.alfac.foodproduto.core.application.adapters.controller.ControladorItem;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
-import br.com.alfac.foodproduto.core.exception.item.ItemError;
+import br.com.alfac.foodproduto.core.exception.ItemError;
 import br.com.alfac.foodproduto.infra.config.exception.FoodProdutoExceptionHandler;
 import br.com.alfac.foodproduto.infra.dto.ItemRequest;
 import utils.ItemHelper;

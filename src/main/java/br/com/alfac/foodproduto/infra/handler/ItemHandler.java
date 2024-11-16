@@ -19,7 +19,7 @@ import br.com.alfac.foodproduto.infra.dto.ItemRequest;
 import br.com.alfac.foodproduto.infra.mapper.ItemMapper;
 import br.com.alfac.foodproduto.core.application.adapters.controller.ControladorItem;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
-import br.com.alfac.foodproduto.core.domain.item.CategoriaItem;
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

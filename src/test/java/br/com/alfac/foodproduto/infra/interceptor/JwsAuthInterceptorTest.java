@@ -32,6 +32,15 @@ public class JwsAuthInterceptorTest {
     }
 
     @Test
+    public void testPreHandleWithNoAuthHeader() {
+        when(request.getHeader("auth")).thenReturn(null);
+
+        boolean result = jwtAuthInterceptor.preHandle(request, response, handler);
+
+        assertTrue(result);
+    }
+
+    @Test
     public void testPreHandleWithInvalidToken() {
         try (MockedStatic<JwtHelper> mockedJwtHelper = mockStatic(JwtHelper.class)) {
             when(request.getHeader("auth")).thenReturn("Bearer invalidToken");

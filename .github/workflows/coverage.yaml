@@ -1,0 +1,21 @@
+name: Coverage
+
+on: [push, pull_request]
+
+# Descomente se precisar de uma nova branch para fazer alterações/testes
+#on:
+#  push:
+#    branches:
+#      - feat/add-coverage-info
+
+jobs:
+  coverage:
+    name: Coverage
+    uses: ALFAC-Org/github-workflows/.github/workflows/coverage.yaml@main  
+    secrets: inherit
+    permissions: write-all
+    with:
+      java_version: "17"
+      minimum_coverage: "0"
+      coverage_results_path: "target/site/jacoco/jacoco.xml"
+      jacoco_csv_file: "target/site/jacoco/jacoco.csv"

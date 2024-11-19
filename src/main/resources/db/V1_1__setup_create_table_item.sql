@@ -1,4 +1,4 @@
-USE fooddb;
+USE foodproduto;
 
 CREATE TABLE
     IF NOT EXISTS item (

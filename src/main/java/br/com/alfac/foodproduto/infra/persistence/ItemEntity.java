@@ -1,30 +1,36 @@
 package br.com.alfac.foodproduto.infra.persistence;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
-@Entity
-@Table(name = "item")
+import br.com.alfac.foodproduto.core.domain.CategoriaItem;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamoDBTable(tableName = "food_produto")
 public class ItemEntity implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @DynamoDBHashKey(attributeName = "id")
     private Long id;
 
-    @NotEmpty(message = "Nome do item é obrigatório")
+    @DynamoDBAttribute(attributeName = "nome")
     private String nome;
 
-    @NotNull(message = "Preço do item é obrigatório")
+    @DynamoDBAttribute(attributeName="preco")
     private BigDecimal preco;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "Categoria do item é obrigatório")
+    @DynamoDBAttribute(attributeName = "categoria")
+    // @DynamoDBTypeConvertedJson(targetType = CategoriaItem.class)
+    @DynamoDBTypeConvertedEnum
     private CategoriaItem categoria;
 
     public Long getId() {

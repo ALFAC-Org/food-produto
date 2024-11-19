@@ -1,14 +1,15 @@
 package br.com.alfac.foodproduto.infra.persistence;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
 import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 
-import java.util.List;
-
-@Repository
-public interface ItemEntityRepository extends JpaRepository<ItemEntity, Long> {
+// @Repository
+@EnableScan
+public interface ItemEntityRepository extends CrudRepository<ItemEntity, Long> {
 
     List<ItemEntity> findByCategoria(CategoriaItem categoria);
 

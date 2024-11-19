@@ -1,5 +1,13 @@
 package br.com.alfac.foodproduto.infra.gateways;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import br.com.alfac.foodproduto.core.domain.CategoriaItem;
@@ -8,19 +16,14 @@ import br.com.alfac.foodproduto.infra.mapper.ItemEntityMapper;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntity;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntityRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-@Component
+@Service
 public class RepositorioItemGatewayImpl implements RepositorioItemGateway {
 
     private final ItemEntityRepository itemEntityRepository;
     private final ItemEntityMapper itemEntityMapper;
 
+    @Autowired
     public RepositorioItemGatewayImpl(final ItemEntityRepository itemEntityRepository, final ItemEntityMapper itemMapper) {
         this.itemEntityRepository = itemEntityRepository;
         this.itemEntityMapper = itemMapper;
@@ -28,7 +31,7 @@ public class RepositorioItemGatewayImpl implements RepositorioItemGateway {
 
     @Override
     public List<Item> consultarItens() {
-        List<ItemEntity> itemEntities = itemEntityRepository.findAll();
+        var itemEntities = itemEntityRepository.findAll();
 
         List<Item> items = new ArrayList<>();
 

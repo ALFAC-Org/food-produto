@@ -140,16 +140,13 @@
                         <id>report</id>
                         <phase>test</phase>
                         <goals>
-                            <!-- Se quiser apenas pastas separadas -->
-                            <!-- <goal>report</goal>-->
-                            <goal>report-aggregate</goal>
+                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- Faz com que o Jacoco gere uma unica saída de relatorios -->
-                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
                             <formats>
                                 <format>HTML</format>
                                 <format>XML</format>
+                                <format>CSV</format>
                             </formats>
                             <includes>
                                 <include>**/*.class</include>

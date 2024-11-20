@@ -152,7 +152,7 @@
                                 <include>**/*.class</include>
                             </includes>
                             <excludes>
-                                <exclude>*</exclude>
+                                <exclude>br/com/alfac/foodproduto/infra/config/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>

@@ -6,54 +6,13 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 71.5%               |
-| :heavy_check_mark: Number of Lines Covered | 301    |
-| :x: Number of Lines Missed  | 120     |
-| Total Number of Lines   | 421     |
+| Code Coverage %         | 91.26%               |
+| :heavy_check_mark: Number of Lines Covered | 282    |
+| :x: Number of Lines Missed  | 27     |
+| Total Number of Lines   | 309     |
 
 
 ## Details:
-
-    
-### br/com/alfac/foodproduto/infra/config/beans
-
-<details>
-    <summary>
-:x: DynamoDbConfiguration.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #37
-```
-        return AmazonDynamoDBClientBuilder
-```
-</details>
-
-    
-
-<details>
-    <summary>
-:x: ItemConfiguration.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: JacksonConfiguration.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
 
     
 ### br/com/alfac/foodproduto/infra/gateways
@@ -315,96 +274,6 @@
         
 #### All Lines Covered!
         
-</details>
-
-    
-### br/com/alfac/foodproduto/infra/config
-
-<details>
-    <summary>
-:x: SwaggerConfig.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: WebConfig.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #17
-```
-    }
-```
-- Line #25
-```
-    }
-```
-</details>
-
-    
-### br/com/alfac/foodproduto/infra/config/exception
-
-<details>
-    <summary>
-:x: ApiError.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #70
-```
-    }
-```
-- Line #79
-```
-    }
-```
-</details>
-
-    
-
-<details>
-    <summary>
-:x: ApiErrorItem.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #17
-```
-    }
-```
-- Line #22
-```
-    }
-```
-</details>
-
-    
-
-<details>
-    <summary>
-:x: FoodProdutoExceptionHandler.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #75
-```
-        }
-```
 </details>
 
     

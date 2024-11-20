@@ -1,5 +1,7 @@
 package br.com.alfac.foodproduto.core.application.adapters.controller;
 
+import java.util.List;
+
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;
 import br.com.alfac.foodproduto.core.application.adapters.presenter.ItemPresenter;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
@@ -12,8 +14,6 @@ import br.com.alfac.foodproduto.core.application.usecases.ExcluirItemUseCase;
 import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
-
-import java.util.List;
 
 public class ControladorItem {
 
@@ -42,6 +42,10 @@ public class ControladorItem {
     }
 
     public ItemDTO cadastrarItem(ItemDTO itemDTO) throws FoodProdutoException {
+        List<ItemDTO> itensExistentes = consultarItens();
+        long newId = itensExistentes.stream().mapToLong(ItemDTO::getId).max().orElse(0) + 1;
+        itemDTO.setId(newId);
+
         CadastrarItemUseCase cadastrarItemUseCase = new CadastrarItemUseCase(this.repositorioItemGateway);
         Item item = cadastrarItemUseCase.execute(itemDTO);
         return ItemPresenter.mapearParaItemDTO(item);

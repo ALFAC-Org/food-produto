@@ -15,7 +15,8 @@ public class CadastrarItemUseCase {
 
     public Item execute(ItemDTO itemDTO) throws FoodProdutoException {
         Item item = new Item();
-
+        
+        item.setId(itemDTO.getId());
         item.setNome(itemDTO.getNome());
         item.setPreco(itemDTO.getPreco());
         item.setCategoria(itemDTO.getCategoria());

@@ -1,4 +1,4 @@
-# Microsserviço `food-cliente` - ALFAC · ![Coverage](.github/badges/jacoco.svg) ![Branches](.github/badges/branches.svg) 
+# Microsserviço `food-produto` - ALFAC · ![Coverage](.github/badges/jacoco.svg) ![Branches](.github/badges/branches.svg) 
 
 Este repositório fornece o microsserviço relacionado ao gerenciamento dos produtos da plataforma food.
 

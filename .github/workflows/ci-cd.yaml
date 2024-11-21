@@ -92,7 +92,7 @@ jobs:
     needs: build-docker-image
 
     env:
-      FOOD_CLIENTE_IMAGE_VERSION: ${{ github.event.inputs.app_image_version || github.sha }}
+      FOOD_PRODUTO_IMAGE_VERSION: ${{ github.event.inputs.app_image_version || github.sha }}
 
     steps:
       - name: Checkout code
@@ -128,7 +128,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
-        run: terraform init  -reconfigure -backend-config="bucket=${{ secrets.AWS_BUCKET_NAME }}" -backend-config="key=terraform-food-cliente.tfstate" -backend-config="region=${{ secrets.AWS_REGION }}"
+        run: terraform init  -reconfigure -backend-config="bucket=${{ secrets.AWS_BUCKET_NAME }}" -backend-config="key=terraform-food-produto.tfstate" -backend-config="region=${{ secrets.AWS_REGION }}"
         working-directory: terraform
 
       - name: Terraform Validate

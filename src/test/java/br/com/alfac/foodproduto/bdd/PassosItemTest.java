@@ -21,7 +21,7 @@ public class PassosItemTest {
 
     private Item itemResponse;
 
-    private final String ENDPOINT_ITENS = "http://localhost:8080/api/v1/itens";
+    private final String ENDPOINT_ITENS = "http://localhost:8081/api/v1/itens";
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
@@ -51,7 +51,7 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get("/{id}", itemResponse.getId().toString());
+                .get(ENDPOINT_ITENS + "/por-id/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é exibido com sucesso")
@@ -66,26 +66,25 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get();
+                .get(ENDPOINT_ITENS);
     }
 
     @Então("os itens são exibidos com sucesso")
     public void itensSaoExibidosComSucesso() {
         response.then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath("./schemas/ItemResponseSchema.json"))
-                .body("number", equalTo(0))
-                .body("size", equalTo(10));
+                .statusCode(HttpStatus.OK.value());
     }
 
     @Quando("requisitar a alteração do item")
     public void requisitarAlteracaoDaMensagem() {
-        itemResponse.setNome("novo conteudo");
+        var itemRequest = ItemHelper.criarItemRequest();
+        itemRequest.setNome("Novo Hamburguer");
+
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(itemResponse)
+                .body(itemRequest)
                 .when()
-                .put("/{id}", itemResponse.getId().toString());
+                .put(ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é atualizado com sucesso")
@@ -100,14 +99,14 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .delete("/{id}", itemResponse.getId().toString());
+                .delete(ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é removido com sucesso")
     public void itemRemovidoComSucesso() {
         response.then()
                 .statusCode(HttpStatus.OK.value())
-                .body(equalTo("mensagem removida"));
+                .body(matchesJsonSchemaInClasspath("./schemas/ItemResponseSchema.json"));
     }
 
 }

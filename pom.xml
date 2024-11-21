@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,26 +10,32 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    
+
     <groupId>br.com.alfac</groupId>
     <artifactId>food-produto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>food-produto</name>
     <description>API Food Produto</description>
-    
+
     <properties>
         <java.version>17</java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
     <repositories>
-         <repository>
+        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    
+
     <dependencies>
+
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency> -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -65,22 +71,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
@@ -96,7 +86,7 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
-        
+
         <!-- Config para carregar automaticamente as variaveis ENV no ambiente de teste -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>
@@ -140,7 +130,7 @@
                         <id>report</id>
                         <phase>test</phase>
                         <goals>
-                             <goal>report</goal>
+                            <goal>report</goal>
                         </goals>
                         <configuration>
                             <formats>
@@ -169,7 +159,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-<!--                                            <minimum>0.80</minimum> valor requirido pelo projeto -->
+                                            <!--                                            <minimum>0.80</minimum> valor requirido pelo projeto -->
                                             <!-- Coverage mínimo Por hora vamos colocar um valor baixo para que passe -->
                                             <minimum>0.00</minimum>
                                         </limit>
@@ -205,9 +195,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <environmentVariables>
-                        <SPRING_DATASOURCE_URL>jdbc:mysql://localhost:31006/pedidos</SPRING_DATASOURCE_URL>
-                        <SPRING_DATASOURCE_USERNAME>root</SPRING_DATASOURCE_USERNAME>
-                        <SPRING_DATASOURCE_PASSWORD>root</SPRING_DATASOURCE_PASSWORD>
+                        <SPRING_FOOD_PRODUTO_DATASOURCE_URL>jdbc:mysql://localhost:31006/pedidos</SPRING_FOOD_PRODUTO_DATASOURCE_URL>
+                        <SPRING_FOOD_PRODUTO_DATASOURCE_USERNAME>root</SPRING_FOOD_PRODUTO_DATASOURCE_USERNAME>
+                        <SPRING_FOOD_PRODUTO_DATASOURCE_PASSWORD>root</SPRING_FOOD_PRODUTO_DATASOURCE_PASSWORD>
                         <APPLICATION_VERSION>latest</APPLICATION_VERSION>
                         <APPLICATION_DATABASE_VERSION>latest</APPLICATION_DATABASE_VERSION>
                         <ENABLE_FLYWAY>false</ENABLE_FLYWAY>

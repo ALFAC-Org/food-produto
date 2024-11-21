@@ -1,0 +1,144 @@
+# Ref: https://www.docker.com/blog/docker-v2-github-action-is-now-ga/
+name: CI/CD
+
+on:
+#  push:
+#    branches:
+#      - main
+#  # TODO: se pudermos provisionar mais máquinas, isso aqui faz sentido
+#  pull_request:
+#    branches:
+#      - main
+#    types:
+#      - closed
+  workflow_run:
+    workflows: ["Coverage"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      app_image_version:
+        description: 'Version of the application image'
+        required: false
+        default: 'latest'
+
+jobs:
+  check-aws-online:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+# TODO:
+#      - name: Get RDS endpoint
+#        continue-on-error: true # if the DB is not set, we skip the remaining steps
+#        run: |
+#          DB_FOOD_CLIENT_HOST_NAME=$(aws rds describe-db-instances --db-instance-identifier ${{ secrets.DB_FOOD_CLIENTE_IDENTIFIER }} --query "DBInstances[0].Endpoint.Address" --output text)
+#          echo "DB_FOOD_CLIENT_HOST_NAME=$DB_FOOD_CLIENT_HOST_NAME" >> $GITHUB_ENV
+#
+#      - name: Check if .env.DB_FOOD_CLIENT_HOST_NAME was set
+#        run: |
+#          if [ -z "${{ env.DB_FOOD_CLIENT_HOST_NAME }}" ]; then
+#            echo "Verifique se subiu food-infra e se os recursos foram provisionados (razão: o banco de dados está fora do ar)."
+#            exit 1
+#          fi
+
+  build-docker-image:
+    runs-on: ubuntu-latest
+    needs: check-aws-online
+
+    env:
+      BUILD_VERSION: ${{ github.event.inputs.app_image_version || github.sha }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Load environment variables
+        uses: thaind0/envfile@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.FOOD_PRODUTO_IMAGE_VERSION }}:cache
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.FOOD_PRODUTO_IMAGE_VERSION }}:cache,mode=max
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.FOOD_PRODUTO_IMAGE_VERSION }}:${{ env.BUILD_VERSION }}
+
+  apply-new-version:
+    runs-on: ubuntu-latest
+    needs: build-docker-image
+
+    env:
+      FOOD_CLIENTE_IMAGE_VERSION: ${{ github.event.inputs.app_image_version || github.sha }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Load environment variables
+        uses: thaind0/envfile@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+          override: false # prevent overriding FOOD_PRODUTO_IMAGE_VERSION -> don't create the env variables
+          file: terraform/.env
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get K8s host
+        run: |
+          K8S_HOST=$(aws eks describe-cluster --name ${{ secrets.CLUSTER_NAME }} --query "cluster.endpoint" --output text)
+          echo "K8S_HOST=$K8S_HOST" >> $GITHUB_ENV
+
+      - name: Overwrite .env variable
+        run: |
+          echo "FOOD_PRODUTO_IMAGE_VERSION=${{ env.FOOD_PRODUTO_IMAGE_VERSION }}" >> .env
+          echo "K8S_HOST=${{ env.K8S_HOST }}" >> .env
+        working-directory: terraform
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init  -reconfigure -backend-config="bucket=${{ secrets.AWS_BUCKET_NAME }}" -backend-config="key=terraform-food-cliente.tfstate" -backend-config="region=${{ secrets.AWS_REGION }}"
+        working-directory: terraform
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: terraform
+
+      - name: Terraform Plan
+        run: bash terraform.sh plan
+        working-directory: terraform
+
+      - name: Terraform Apply
+        run: bash terraform.sh apply -auto-approve
+        working-directory: terraform

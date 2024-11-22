@@ -1,10 +1,11 @@
-package br.com.alfac.foodproduto.infra.mapper;
+package br.com.alfac.foodproduto.unit.infra.mapper;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import br.com.alfac.foodproduto.infra.mapper.ItemEntityMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -14,7 +15,7 @@ import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntity;
 
 
-public class ItemEntityMapperTest {
+class ItemEntityMapperTest {
 
     private ItemEntityMapper mapper;
 
@@ -24,7 +25,7 @@ public class ItemEntityMapperTest {
     }
 
     @Test
-    public void testToEntity() {
+    void testToEntity() {
         Item item = new Item();
         item.setId(1L);
         item.setNome("Hamburguer");
@@ -40,7 +41,7 @@ public class ItemEntityMapperTest {
     }
 
     @Test
-    public void testToEntity_QuandoItemNulo() {
+    void testToEntity_QuandoItemNulo() {
         Item item = null;
 
         ItemEntity itemEntity = mapper.toEntity(item);
@@ -49,7 +50,7 @@ public class ItemEntityMapperTest {
     }
 
     @Test
-    public void testToDomain() {
+    void testToDomain() {
         ItemEntity itemEntity = new ItemEntity();
         itemEntity.setId(1L);
         itemEntity.setNome("Hamburguer");
@@ -65,7 +66,7 @@ public class ItemEntityMapperTest {
     }
 
     @Test
-    public void testToDomain_QuandoItemEntityNulo() {
+    void testToDomain_QuandoItemEntityNulo() {
         ItemEntity itemEntity = null;
 
         Item item = mapper.toDomain(itemEntity);

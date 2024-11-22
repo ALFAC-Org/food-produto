@@ -1,7 +1,8 @@
-package br.com.alfac.foodproduto.infra.healthcheck.handler;
+package br.com.alfac.foodproduto.unit.infra.healthcheck.handler;
 
 import br.com.alfac.foodproduto.infra.config.exception.ApiErrorItem;
 
+import br.com.alfac.foodproduto.infra.healthcheck.handler.HealthCheckHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

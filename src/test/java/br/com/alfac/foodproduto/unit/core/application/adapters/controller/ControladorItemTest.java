@@ -1,9 +1,11 @@
-package br.com.alfac.foodproduto.core.application.adapters.controller;
+package br.com.alfac.foodproduto.unit.core.application.adapters.controller;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import br.com.alfac.foodproduto.core.application.adapters.controller.ControladorItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +31,7 @@ import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 
 @ExtendWith(MockitoExtension.class)
-public class ControladorItemTest {
+class ControladorItemTest {
 
     @Mock
     private RepositorioItemGateway repositorioItemGateway;
@@ -37,7 +39,7 @@ public class ControladorItemTest {
     private ControladorItem controladorItem;
  
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         controladorItem = new ControladorItem(repositorioItemGateway);
     }
 

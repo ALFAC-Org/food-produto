@@ -1,8 +1,9 @@
-package br.com.alfac.foodproduto.infra.mapper;
+package br.com.alfac.foodproduto.unit.infra.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import br.com.alfac.foodproduto.infra.mapper.ItemMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -12,17 +13,17 @@ import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.infra.dto.ItemRequest;
 
 
-public class ItemMapperTest {
+class ItemMapperTest {
 
     private ItemMapper mapper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         mapper = Mappers.getMapper(ItemMapper.class);
     }
 
     @Test
-    public void testToDTO() {
+    void testToDTO() {
         ItemRequest itemRequest = new ItemRequest();
         itemRequest.setNome("Hamburguer");
         itemRequest.setPreco(10.0);
@@ -36,7 +37,7 @@ public class ItemMapperTest {
     }
 
     @Test
-    public void testToEntity_QuandoItemNulo() {
+    void testToEntity_QuandoItemNulo() {
         ItemRequest itemRequest = null;
 
         ItemDTO itemDTO = mapper.toDTO(itemRequest);

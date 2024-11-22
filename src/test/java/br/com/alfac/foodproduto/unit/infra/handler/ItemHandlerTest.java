@@ -1,4 +1,4 @@
-package br.com.alfac.foodproduto.infra.handler;
+package br.com.alfac.foodproduto.unit.infra.handler;
 
 import br.com.alfac.foodproduto.core.application.adapters.controller.ControladorItem;
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
@@ -7,6 +7,7 @@ import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import br.com.alfac.foodproduto.core.exception.ItemError;
 import br.com.alfac.foodproduto.infra.config.exception.FoodProdutoExceptionHandler;
 import br.com.alfac.foodproduto.infra.dto.ItemRequest;
+import br.com.alfac.foodproduto.infra.handler.ItemHandler;
 import utils.ItemHelper;
 
 import org.junit.jupiter.api.AfterEach;

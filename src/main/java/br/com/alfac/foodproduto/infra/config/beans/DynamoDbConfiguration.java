@@ -15,22 +15,17 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 @EnableDynamoDBRepositories(basePackages = "br.com.alfac.foodproduto.infra.persistence")
 public class DynamoDbConfiguration {
 
-    @Value("${aws.secretKey}")
-    private String awsAccessKey;
+    @Value("${aws.accessKey}")
+    private String accessKey;
 
-    @Value("${aws.accessKeyId}")
-    private String awsAccessKeyId;
+    @Value("${aws.secretKey}")
+    private String secretKey;
 
     @Value("${aws.dynamodb.endpoint}")
     private String awsDynamoEndpoint;
-    
+
     @Value("${aws.region}")
     private String awsRegion;
-
-    // @Bean
-    // public DynamoDBMapper dynamoDBMapper() {
-    //     return new DynamoDBMapper(amazonDynamoDB());
-    // }
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
@@ -43,17 +38,39 @@ public class DynamoDbConfiguration {
 
     private AwsClientBuilder.EndpointConfiguration endpointConfiguration() {
         return new AwsClientBuilder.EndpointConfiguration(
-                "http://localhost:4566", // Porta padrão do LocalStack - Pegar das configs
-                "us-east-1" // Região padrão - Pegar das configs/properties
+                awsDynamoEndpoint,
+                awsRegion
         );
     }
 
     private AWSStaticCredentialsProvider credentialsProvider() {
         return new AWSStaticCredentialsProvider(
-                new BasicAWSCredentials(
-                        "test", // Chave de acesso fake para LocalStack - Pegar das vars de ambiente
-                        "test"  // Chave secreta fake para LocalStack - Pegar das vars de ambiente
-                )
+                new BasicAWSCredentials(accessKey, secretKey)
         );
     }
+
+    // TODO: Segundo o GPT, o código abaixo é um exemplo de como acessar o DynamoDB com as credenciais configuradas acima.
+    // public class DynamoDBExample {
+    //     public static void main(String[] args) {
+    //         // Configurar as credenciais da AWS
+    //         BasicAWSCredentials awsCreds = new BasicAWSCredentials("your_access_key_id", "your_secret_access_key");
+
+    //         // Configurar o cliente do DynamoDB
+    //         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+    //                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+    //                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("https://dynamodb.us-east-1.amazonaws.com", "us-east-1"))
+    //                 .build();
+
+    //         // Criar uma instância do DynamoDB
+    //         DynamoDB dynamoDB = new DynamoDB(client);
+
+    //         // Obter a tabela
+    //         Table table = dynamoDB.getTable("food_produto");
+
+    //         // Exemplo de operação: obter um item da tabela
+    //         // (Substitua "your_primary_key" e "your_primary_key_value" pelos valores reais)
+    //         Item item = table.getItem("your_primary_key", "your_primary_key_value");
+    //         System.out.println(item.toJSONPretty());
+    //     }
+    // }
 }

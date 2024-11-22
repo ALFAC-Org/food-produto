@@ -1,10 +1,10 @@
-package br.com.alfac.foodproduto.core.application.usecases;
+package br.com.alfac.foodproduto.unit.core.application.usecases;
 
+import br.com.alfac.foodproduto.core.application.usecases.ConsultarItensPorCategoriaUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.alfac.foodproduto.core.application.adapters.gateways.RepositorioItemGateway;

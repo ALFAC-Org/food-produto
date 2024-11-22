@@ -1,9 +1,10 @@
-package br.com.alfac.foodproduto.core.application.dto;
+package br.com.alfac.foodproduto.unit.core.application.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
+import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import org.junit.jupiter.api.Test;
 
 import br.com.alfac.foodproduto.core.domain.CategoriaItem;

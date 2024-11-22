@@ -1,14 +1,13 @@
-package br.com.alfac.foodproduto.infra.interceptor;
+package br.com.alfac.foodproduto.unit.infra.interceptor;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import br.com.alfac.foodproduto.infra.interceptor.JwtAuthInterceptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -17,14 +16,14 @@ import br.com.alfac.foodproduto.infra.helper.JwtHelper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JwsAuthInterceptorTest {
+class JwsAuthInterceptorTest {
     private JwtAuthInterceptor jwtAuthInterceptor;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Object handler;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         jwtAuthInterceptor = new JwtAuthInterceptor();
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
@@ -32,7 +31,7 @@ public class JwsAuthInterceptorTest {
     }
 
     @Test
-    public void testPreHandleWithNoAuthHeader() {
+    void testPreHandleWithNoAuthHeader() {
         when(request.getHeader("auth")).thenReturn(null);
 
         boolean result = jwtAuthInterceptor.preHandle(request, response, handler);
@@ -41,7 +40,7 @@ public class JwsAuthInterceptorTest {
     }
 
     @Test
-    public void testPreHandleWithInvalidToken() {
+    void testPreHandleWithInvalidToken() {
         try (MockedStatic<JwtHelper> mockedJwtHelper = mockStatic(JwtHelper.class)) {
             when(request.getHeader("auth")).thenReturn("Bearer invalidToken");
             mockedJwtHelper.when(() -> JwtHelper.getWho("invalidToken")).thenReturn("INVALID");
@@ -54,7 +53,7 @@ public class JwsAuthInterceptorTest {
     }
 
     @Test
-    public void testPreHandleWithNoToken() {
+    void testPreHandleWithNoToken() {
         when(request.getHeader("auth")).thenReturn("");
 
         boolean result = jwtAuthInterceptor.preHandle(request, response, handler);
@@ -64,7 +63,7 @@ public class JwsAuthInterceptorTest {
     }
 
     @Test
-    public void testPreHandleWithMalformedToken() {
+    void testPreHandleWithMalformedToken() {
         when(request.getHeader("auth")).thenReturn("InvalidTokenFormat");
 
         boolean result = jwtAuthInterceptor.preHandle(request, response, handler);

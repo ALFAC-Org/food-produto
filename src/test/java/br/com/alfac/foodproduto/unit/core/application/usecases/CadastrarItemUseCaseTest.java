@@ -1,5 +1,6 @@
-package br.com.alfac.foodproduto.core.application.usecases;
+package br.com.alfac.foodproduto.unit.core.application.usecases;
 
+import br.com.alfac.foodproduto.core.application.usecases.CadastrarItemUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +13,6 @@ import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
 import utils.ItemHelper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

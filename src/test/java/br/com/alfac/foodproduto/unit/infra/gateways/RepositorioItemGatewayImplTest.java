@@ -1,9 +1,10 @@
-package br.com.alfac.foodproduto.infra.gateways;
+package br.com.alfac.foodproduto.unit.infra.gateways;
 
 import br.com.alfac.foodproduto.core.application.dto.ItemDTO;
 import br.com.alfac.foodproduto.core.domain.CategoriaItem;
 import br.com.alfac.foodproduto.core.domain.Item;
 import br.com.alfac.foodproduto.core.exception.FoodProdutoException;
+import br.com.alfac.foodproduto.infra.gateways.RepositorioItemGatewayImpl;
 import br.com.alfac.foodproduto.infra.mapper.ItemEntityMapper;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntity;
 import br.com.alfac.foodproduto.infra.persistence.ItemEntityRepository;

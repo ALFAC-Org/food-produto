@@ -47,7 +47,7 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(itemRequest)
-                .when().post(ENDPOINT_ITENS);
+                .when().post(FULL_ENDPOINT_ITENS);
         return response.then().extract().as(Item.class);
     }
 

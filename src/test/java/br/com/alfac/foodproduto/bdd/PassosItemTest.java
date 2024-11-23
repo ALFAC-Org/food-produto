@@ -25,11 +25,12 @@ public class PassosItemTest {
     // @Value("${server.port}")
     // private String appPort;
 
-    @Value("http://localhost:${server.port}/api/v1/itens")
+    @Value("${server.url}")
     private String ENDPOINT_ITENS;
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
+        System.out.println("ENDPOINT_ITENS: " + ENDPOINT_ITENS);
         var itemRequest = ItemHelper.criarItemRequest();
 
         response = given()

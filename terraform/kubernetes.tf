@@ -10,11 +10,11 @@ resource "kubernetes_secret" "secret_food" {
     APPLICATION_PORT             = var.app_port
     FOOD_PRODUTO_IMAGE_VERSION   = var.food_produto_image_version
     FOOD_PRODUTO_PORT            = var.food_produto_service_port
+    FOOD_PRODUTO_DB_ENDPOINT     = var.food_produto_db_endpoint # Temos o nome da tabela no endpoint?
     FOOD_PRODUTO_TABLE_NAME      = var.food_produto_db_table_name
-
-    # TODO: Quando tivermos as configurações de banco, precisamos adaptar aqui
-    SPRING_FOOD_PRODUTO_DATASOURCE_USERNAME = "TODO"
-    SPRING_FOOD_PRODUTO_DATASOURCE_PASSWORD = "TODO"
+    AWS_REGION                   = var.aws_region
+    AWS_ACCESS_KEY_ID            = var.aws_access_key_id
+    AWS_SECRET_ACCESS_KEY        = var.aws_secret_access_key
   }
 
   lifecycle {

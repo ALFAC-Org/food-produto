@@ -21,8 +21,11 @@ public class DynamoDbConfiguration {
     @Value("${aws.secretKey}")
     private String secretKey;
 
-    @Value("${aws.dynamodb.endpoint}")
+    @Value("${aws.dynamodb.endpoint}") // TODO: Talvez add o table nome aqui
     private String awsDynamoEndpoint;
+
+    // @Value("${aws.dynamodb.tablename}") 
+    // private String awsDynamoTableName;
 
     @Value("${aws.region}")
     private String awsRegion;
@@ -48,29 +51,4 @@ public class DynamoDbConfiguration {
                 new BasicAWSCredentials(accessKey, secretKey)
         );
     }
-
-    // TODO: Segundo o GPT, o código abaixo é um exemplo de como acessar o DynamoDB com as credenciais configuradas acima.
-    // public class DynamoDBExample {
-    //     public static void main(String[] args) {
-    //         // Configurar as credenciais da AWS
-    //         BasicAWSCredentials awsCreds = new BasicAWSCredentials("your_access_key_id", "your_secret_access_key");
-
-    //         // Configurar o cliente do DynamoDB
-    //         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-    //                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
-    //                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("https://dynamodb.us-east-1.amazonaws.com", "us-east-1"))
-    //                 .build();
-
-    //         // Criar uma instância do DynamoDB
-    //         DynamoDB dynamoDB = new DynamoDB(client);
-
-    //         // Obter a tabela
-    //         Table table = dynamoDB.getTable("food_produto");
-
-    //         // Exemplo de operação: obter um item da tabela
-    //         // (Substitua "your_primary_key" e "your_primary_key_value" pelos valores reais)
-    //         Item item = table.getItem("your_primary_key", "your_primary_key_value");
-    //         System.out.println(item.toJSONPretty());
-    //     }
-    // }
 }

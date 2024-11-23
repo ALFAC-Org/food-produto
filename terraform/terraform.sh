@@ -31,4 +31,7 @@ terraform $METHOD $PARAMS \
 -var "food_produto_image_name=$FOOD_PRODUTO_IMAGE_NAME" \
 -var "food_produto_image_version=$FOOD_PRODUTO_IMAGE_VERSION" \
 -var "food_produto_service_port=$FOOD_PRODUTO_SERVICE_PORT" \
+-var "food_produto_db_endpoint=$FOOD_PRODUTO_DB_ENDPOINT" \
+-var "aws_secret_access_key"=$AWS_SECRET_ACCESS_KEY \
+-var "aws_access_key_id"=$AWS_ACCESS_KEY_ID \
 -var "food_produto_db_table_name=$FOOD_PRODUTO_DB_TABLE_NAME"

@@ -11,6 +11,7 @@ services:
       - "8080:8080"
     environment:
       - MAVEN_CONFIG=/app/.m2
+      - PROFILE=test
     depends_on:
       - localstack
     networks:

@@ -4,12 +4,14 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.response.Response;
+import jakarta.annotation.PostConstruct;
 import utils.ItemHelper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import br.com.alfac.foodproduto.core.domain.Item;
+import org.springframework.beans.factory.annotation.Value;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
@@ -20,8 +22,15 @@ public class PassosItemTest {
 
     private Item itemResponse;
 
-//    private final String ENDPOINT_ITENS = "http://localhost:8081/api/v1/itens";
-    private final String ENDPOINT_ITENS = "http://localhost:8080/api/v1/itens";
+    @Value("${server.port}")
+    private String appPort;
+
+    private String ENDPOINT_ITENS;
+
+    @PostConstruct
+    public void init() {
+        ENDPOINT_ITENS = String.format("http://localhost:%s/api/v1/itens", appPort);
+    }
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {

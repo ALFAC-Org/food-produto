@@ -22,15 +22,11 @@ public class PassosItemTest {
 
     private Item itemResponse;
 
-    @Value("${server.port}")
-    private String appPort;
+    // @Value("${server.port}")
+    // private String appPort;
 
+    @Value("http://localhost:${server.port}/api/v1/itens")
     private String ENDPOINT_ITENS;
-
-    @PostConstruct
-    public void init() {
-        ENDPOINT_ITENS = String.format("http://localhost:%s/api/v1/itens", appPort);
-    }
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {

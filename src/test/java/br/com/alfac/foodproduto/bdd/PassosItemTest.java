@@ -4,7 +4,6 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.restassured.response.Response;
-import jakarta.annotation.PostConstruct;
 import utils.ItemHelper;
 
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import br.com.alfac.foodproduto.core.domain.Item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
@@ -28,15 +26,14 @@ public class PassosItemTest {
     // @Value("${server.port}")
     // private String appPort;
 
+    @Value("${server.url}")
     private String ENDPOINT_ITENS;
 
     @Autowired
-    public PassosItemTest(Environment env) {
-        this.ENDPOINT_ITENS = env.getProperty("server.url");
+    public PassosItemTest() {
         this.ENDPOINT_ITENS += "/api/v1/itens";
     }
     
-
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
         System.out.println("ENDPOINT_ITENS: " + ENDPOINT_ITENS);

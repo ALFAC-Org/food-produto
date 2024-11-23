@@ -13,12 +13,12 @@ import br.com.alfac.foodproduto.core.domain.Item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import org.springframework.stereotype.Component;
 
-@Component
+@SpringBootTest
 public class PassosItemTest {
 
     private Response response;

@@ -48,6 +48,10 @@ public class DynamoDbConfiguration {
     }
 
     private AWSStaticCredentialsProvider credentialsProvider() {
+        System.out.println("accessKey: " + accessKey);
+        System.out.println("secretKey: " + secretKey);
+        System.out.println("awsRegion: " + awsRegion);
+        System.out.println("awsDynamoEndpoint: " + awsDynamoEndpoint);
         return new AWSStaticCredentialsProvider(
                 new BasicAWSCredentials(accessKey, secretKey)
         );

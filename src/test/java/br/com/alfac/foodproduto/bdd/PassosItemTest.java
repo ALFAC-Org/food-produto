@@ -30,6 +30,7 @@ public class PassosItemTest {
 
     private String FULL_ENDPOINT_ITENS;
 
+    @Autowired
     public PassosItemTest(@Value("${server.url}") String baseUrl) {
         this.FULL_ENDPOINT_ITENS = baseUrl + "/api/v1/itens";
     }

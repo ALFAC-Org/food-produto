@@ -68,7 +68,7 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get(ENDPOINT_ITENS + "/por-id/{id}", itemResponse.getId().toString());
+                .get(FULL_ENDPOINT_ITENS + "/por-id/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é exibido com sucesso")
@@ -83,7 +83,7 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get(ENDPOINT_ITENS);
+                .get(FULL_ENDPOINT_ITENS);
     }
 
     @Então("os itens são exibidos com sucesso")
@@ -101,7 +101,7 @@ public class PassosItemTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(itemRequest)
                 .when()
-                .put(ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
+                .put(FULL_ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é atualizado com sucesso")
@@ -116,7 +116,7 @@ public class PassosItemTest {
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .delete(ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
+                .delete(FULL_ENDPOINT_ITENS + "/{id}", itemResponse.getId().toString());
     }
 
     @Então("o item é removido com sucesso")

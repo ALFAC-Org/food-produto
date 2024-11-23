@@ -2,6 +2,11 @@
 
 Este repositório fornece o microsserviço relacionado ao gerenciamento dos produtos da plataforma food.
 
+### Rodando localmente
+
+```bash
+docker compose up
+```
 
 ## Membros
 

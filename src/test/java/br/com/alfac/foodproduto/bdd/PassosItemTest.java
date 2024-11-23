@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PassosItemTest {
 
     private Response response;
@@ -27,16 +29,19 @@ public class PassosItemTest {
     // private String appPort;
 
     @Value("${server.url}")
-    private String ENDPOINT_ITENS;
+    private String SERVER_URL;
+
+    private String FULL_ENDPOINT_ITENS;
 
     @Autowired
     public PassosItemTest() {
-        this.ENDPOINT_ITENS += "/api/v1/itens";
+        this.FULL_ENDPOINT_ITENS = SERVER_URL + "/api/v1/itens";
     }
     
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
-        System.out.println("ENDPOINT_ITENS: " + ENDPOINT_ITENS);
+        System.out.println("ENDPOINT_ITENS: " + SERVER_URL);
+        System.out.println("FULL_ENDPOINT_ITENS: " + FULL_ENDPOINT_ITENS);
         var itemRequest = ItemHelper.criarItemRequest();
 
         response = given()

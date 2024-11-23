@@ -11,14 +11,9 @@ import org.springframework.http.MediaType;
 
 import br.com.alfac.foodproduto.core.domain.Item;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-@SpringBootTest
 public class PassosItemTest {
 
     private Response response;
@@ -28,12 +23,7 @@ public class PassosItemTest {
     // @Value("${server.port}")
     // private String appPort;
 
-    private String FULL_ENDPOINT_ITENS;
-
-    @Autowired
-    public PassosItemTest(@Value("${server.url}") String baseUrl) {
-        this.FULL_ENDPOINT_ITENS = baseUrl + "/api/v1/itens";
-    }
+    private String FULL_ENDPOINT_ITENS = "http://localhost:8080/api/v1/itens";
     
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {

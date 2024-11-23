@@ -28,19 +28,14 @@ public class PassosItemTest {
     // @Value("${server.port}")
     // private String appPort;
 
-    @Value("${server.url}")
-    private String SERVER_URL;
-
     private String FULL_ENDPOINT_ITENS;
 
-    @Autowired
-    public PassosItemTest() {
-        this.FULL_ENDPOINT_ITENS = SERVER_URL + "/api/v1/itens";
+    public PassosItemTest(@Value("${server.url}") String baseUrl) {
+        this.FULL_ENDPOINT_ITENS = baseUrl + "/api/v1/itens";
     }
     
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
-        System.out.println("ENDPOINT_ITENS: " + SERVER_URL);
         System.out.println("FULL_ENDPOINT_ITENS: " + FULL_ENDPOINT_ITENS);
         var itemRequest = ItemHelper.criarItemRequest();
 

@@ -1,4 +1,4 @@
-name: Behavior Driven Development
+name: BDD Tests
 
 on:
   workflow_run:
@@ -17,7 +17,7 @@ on:
         default: '17'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: ${{ inputs.java_version }}
+          java-version: ${{ inputs.java_version }} || '17'
           cache: "maven"
 
       - name: Set up Docker Compose
@@ -45,7 +45,7 @@ jobs:
           done
 
       - name: Run BDD tests
-        run: ./mvnw test -P bdd-tests
+        run: mvn test -P bdd-tests
 
       - name: Stop and remove services
         run: docker-compose down

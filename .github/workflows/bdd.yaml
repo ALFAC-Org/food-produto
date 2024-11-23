@@ -11,10 +11,10 @@ on:
         description: 'Start BDD Tests'
         required: false
         default: 'true'
-      java_version:
-        description: 'Java version'
-        required: false
-        default: '17'
+#      java_version:
+#        description: 'Java version'
+#        required: false
+#        default: '17'
 
 jobs:
   test:
@@ -28,7 +28,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: ${{ inputs.java_version }}
+          # java-version: ${{ inputs.java_version }}
+          java-version: "17"
           cache: "maven"
 
       - name: Set up Docker Compose

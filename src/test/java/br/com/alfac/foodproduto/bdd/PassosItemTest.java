@@ -20,7 +20,8 @@ public class PassosItemTest {
 
     private Item itemResponse;
 
-    private final String ENDPOINT_ITENS = "http://localhost:8081/api/v1/itens";
+//    private final String ENDPOINT_ITENS = "http://localhost:8081/api/v1/itens";
+    private final String ENDPOINT_ITENS = "http://localhost:8080/api/v1/itens";
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {

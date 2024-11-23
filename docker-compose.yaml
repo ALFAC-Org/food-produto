@@ -13,6 +13,8 @@ services:
       - MAVEN_CONFIG=/app/.m2
     depends_on:
       - localstack
+    networks:
+      - shared-network
   localstack:
     image: localstack/localstack:latest
     container_name: localstack
@@ -26,3 +28,9 @@ services:
     volumes:
       - "./run-localstack.sh:/etc/localstack/init/ready.d/init-aws.sh"
 #    entrypoint: ["/docker-entrypoint-initaws.d/init.sh"]
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    driver: bridge

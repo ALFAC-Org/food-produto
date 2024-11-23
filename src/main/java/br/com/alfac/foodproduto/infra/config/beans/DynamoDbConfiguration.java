@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -25,35 +26,24 @@ public class DynamoDbConfiguration {
     @Value("${aws.dynamodb.endpoint}") // TODO: Talvez add o table nome aqui
     private String awsDynamoEndpoint;
 
+    @Value("${aws.sessionToken}")
+    private String sessionToken;
+
     // @Value("${aws.dynamodb.tablename}") 
     // private String awsDynamoTableName;
 
     @Value("${aws.region}")
     private String awsRegion;
 
-    @Bean
+     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
+        BasicSessionCredentials sessionCredentials = new BasicSessionCredentials(
+                accessKey, secretKey, sessionToken);
+
         return AmazonDynamoDBClientBuilder
                 .standard()
-                .withEndpointConfiguration(endpointConfiguration())
-                .withCredentials(credentialsProvider())
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoEndpoint, awsRegion))
+                .withCredentials(new AWSStaticCredentialsProvider(sessionCredentials))
                 .build();
-    }
-
-    private AwsClientBuilder.EndpointConfiguration endpointConfiguration() {
-        return new AwsClientBuilder.EndpointConfiguration(
-                awsDynamoEndpoint,
-                awsRegion
-        );
-    }
-
-    private AWSStaticCredentialsProvider credentialsProvider() {
-        System.out.println("accessKey: " + accessKey);
-        System.out.println("secretKey: " + secretKey);
-        System.out.println("awsRegion: " + awsRegion);
-        System.out.println("awsDynamoEndpoint: " + awsDynamoEndpoint);
-        return new AWSStaticCredentialsProvider(
-                new BasicAWSCredentials(accessKey, secretKey)
-        );
     }
 }

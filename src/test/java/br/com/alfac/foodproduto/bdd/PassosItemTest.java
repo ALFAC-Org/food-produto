@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import br.com.alfac.foodproduto.core.domain.Item;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
@@ -25,8 +28,14 @@ public class PassosItemTest {
     // @Value("${server.port}")
     // private String appPort;
 
-    @Value("${server.url}")
     private String ENDPOINT_ITENS;
+
+    @Autowired
+    public PassosItemTest(Environment env) {
+        this.ENDPOINT_ITENS = env.getProperty("server.url");
+        this.ENDPOINT_ITENS += "/api/v1/itens";
+    }
+    
 
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {

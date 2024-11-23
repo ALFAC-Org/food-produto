@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Item Response",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "nome": {
+        "type": "string"
+      },
+      "preco": {
+        "type": "number"
+      },
+      "categoria": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "nome",
+      "preco",
+      "categoria"
+    ]
+  }

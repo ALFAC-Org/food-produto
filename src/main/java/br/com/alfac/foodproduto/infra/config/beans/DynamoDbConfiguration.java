@@ -45,11 +45,11 @@ public class DynamoDbConfiguration {
         BasicSessionCredentials sessionCredentials = new BasicSessionCredentials(
                 accessKey, secretKey, sessionToken);
 
-        return AmazonDynamoDBClientBuilder
-                .standard()
-                // .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoEndpoint, awsRegion))
-                .withCredentials(new AWSStaticCredentialsProvider(sessionCredentials))
-                .withRegion(awsRegion)
-                .build();
+        return AmazonDynamoDBClientBuilder.defaultClient();
+                // .standard()
+                // // .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoEndpoint, awsRegion))
+                // .withCredentials(new AWSStaticCredentialsProvider(sessionCredentials))
+                // .withRegion(awsRegion)
+                // .build();
     }
 }

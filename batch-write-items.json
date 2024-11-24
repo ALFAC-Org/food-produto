@@ -1,0 +1,169 @@
+{
+  "food_produto": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "1" },
+          "uuid": { "B": "550e8400e29b41d4a716446655440000" },
+          "nome": { "S": "Hamburguer" },
+          "preco": { "N": "15.00" },
+          "categoria": { "S": "LANCHE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "2" },
+          "uuid": { "B": "123e4567e89b12d3a456426614174000" },
+          "nome": { "S": "Hot Dog" },
+          "preco": { "N": "10.00" },
+          "categoria": { "S": "LANCHE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "3" },
+          "uuid": { "B": "9b2e4d6a8b3a4d2e9b2e4d6a8b3a4d2e" },
+          "nome": { "S": "Sanduiche" },
+          "preco": { "N": "12.00" },
+          "categoria": { "S": "LANCHE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "4" },
+          "uuid": { "B": "f47ac10b58cc4372a5670e02b2c3d479" },
+          "nome": { "S": "Pizza" },
+          "preco": { "N": "20.00" },
+          "categoria": { "S": "LANCHE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "5" },
+          "uuid": { "B": "a8098c1af86e11dabd1a00112444be1e" },
+          "nome": { "S": "Taco" },
+          "preco": { "N": "8.00" },
+          "categoria": { "S": "LANCHE" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "6" },
+          "uuid": { "B": "e02fa0e401ad4e4b9b2e4d6a8b3a4d2e" },
+          "nome": { "S": "Queijo Extra" },
+          "preco": { "N": "2.00" },
+          "categoria": { "S": "COMPLEMENTO" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "7" },
+          "uuid": { "B": "1b4e28ba2fa111d2883f0016d3cca427" },
+          "nome": { "S": "Bacon Extra" },
+          "preco": { "N": "3.00" },
+          "categoria": { "S": "COMPLEMENTO" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "8" },
+          "uuid": { "B": "4c4e4d6a8b3a4d2e9b2e4d6a8b3a4d2e" },
+          "nome": { "S": "Batata Frita" },
+          "preco": { "N": "5.00" },
+          "categoria": { "S": "ACOMPANHAMENTO" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "9" },
+          "uuid": { "B": "7d4448409dc011d1b2455ffdce74fad2" },
+          "nome": { "S": "Aneis de Cebola" },
+          "preco": { "N": "6.00" },
+          "categoria": { "S": "ACOMPANHAMENTO" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "10" },
+          "uuid": { "B": "e02fa0e401ad4e4b9b2e4d6a8b3a4d2e" },
+          "nome": { "S": "Salada" },
+          "preco": { "N": "7.00" },
+          "categoria": { "S": "ACOMPANHAMENTO" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "11" },
+          "uuid": { "B": "550e8400e29b41d4a716446655440000" },
+          "nome": { "S": "Refrigerante" },
+          "preco": { "N": "4.00" },
+          "categoria": { "S": "BEBIDA" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "12" },
+          "uuid": { "B": "123e4567e89b12d3a456426614174000" },
+          "nome": { "S": "Suco" },
+          "preco": { "N": "3.00" },
+          "categoria": { "S": "BEBIDA" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "13" },
+          "uuid": { "B": "9b2e4d6a8b3a4d2e9b2e4d6a8b3a4d2e" },
+          "nome": { "S": "Agua" },
+          "preco": { "N": "2.00" },
+          "categoria": { "S": "BEBIDA" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "14" },
+          "uuid": { "B": "f47ac10b58cc4372a5670e02b2c3d479" },
+          "nome": { "S": "Sorvete" },
+          "preco": { "N": "5.00" },
+          "categoria": { "S": "SOBREMESA" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "N": "15" },
+          "uuid": { "B": "a8098c1af86e11dabd1a00112444be1e" },
+          "nome": { "S": "Bolo" },
+          "preco": { "N": "6.00" },
+          "categoria": { "S": "SOBREMESA" }
+        }
+      }
+    }
+  ]
+}

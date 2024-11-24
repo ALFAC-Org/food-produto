@@ -19,3 +19,10 @@ aws --endpoint-url=http://localhost:4566 dynamodb create-table \
     --region us-east-1
 
 echo "Tabela DynamoDB criada com sucesso."
+
+# Cria os itens na tabela DynamoDB
+cd /etc/localstack/init/ready.d/
+
+aws dynamodb batch-write-item --request-items file://batch-write-items.json --endpoint-url=http://localhost:4566 --region=us-east-1
+
+echo "Itens criados com sucesso."

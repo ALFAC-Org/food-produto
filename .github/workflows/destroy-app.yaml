@@ -23,6 +23,8 @@ jobs:
         uses: thaind0/envfile@v1
         with:
           secrets: ${{ toJSON(secrets) }}
+          override: false # prevent overriding IMAGE_VERSION -> don't create the env variables
+          file: terraform/.env
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1

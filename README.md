@@ -7,7 +7,7 @@ Este repositório fornece o microsserviço de gerenciamento dos produtos (itens)
 * Linguagem de Programação: Java 17
 * Framework: Spring Boot
 * Gerenciador de dependências: Maven
-* Banco de dados: MySQL 8
+* Banco de dados: **NoSQL AWS DynamoDB**
 * Documentação e uso de API's: Swagger
 * Conteinerização: Docker
 * Testes unitários: JUnit 5 + Jacoco
@@ -16,6 +16,8 @@ Este repositório fornece o microsserviço de gerenciamento dos produtos (itens)
 ## Arquitetura
 
 A aplicação está estruturada no padrão de Clean Architecture.
+
+Utiliza do banco de dados **NoSQL AWS DynamoDB** para armazenamento das informações.
 
 Pode ser executada tanto via Docker e Terraform. Podendo ser hospedada tanto localmente ou na nuvem, usando serviços como AWS.
 

@@ -27,7 +27,6 @@ public class PassosItemTest {
     
     @Quando("submeter um novo item")
     public Item submeterNovoItem() {
-        System.out.println("FULL_ENDPOINT_ITENS: " + FULL_ENDPOINT_ITENS);
         var itemRequest = ItemHelper.criarItemRequest();
 
         response = given()

@@ -26,6 +26,7 @@ services:
       - DEBUG=1
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
+      - AWS_REGION=us-east-1
     volumes:
       - "./batch-write-items.json:/etc/localstack/init/ready.d/batch-write-items.json"
       - "./run-localstack.sh:/etc/localstack/init/ready.d/init-aws.sh"

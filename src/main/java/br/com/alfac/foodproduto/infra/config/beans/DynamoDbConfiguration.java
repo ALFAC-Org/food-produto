@@ -1,6 +1,7 @@
 package br.com.alfac.foodproduto.infra.config.beans;
 
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +11,11 @@ import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "br.com.alfac.foodproduto.infra.persistence")
 public class DynamoDbConfiguration {
-
-    private static final Logger logger = LoggerFactory.getLogger(DynamoDbConfiguration.class);
 
     @Value("${aws.dynamodb.endpoint}")
     private String awsDynamoEndpoint;
@@ -34,22 +32,23 @@ public class DynamoDbConfiguration {
     @Value("${aws.region}")
     private String awsRegion;
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
-        logger.info("AWS DynamoDB Endpoint: {}", awsDynamoEndpoint);
-        logger.info("AWS Access Key: {}", accessKey);
-        logger.info("AWS Secret Key: {}", secretKey);
-        logger.info("AWS Session Token: {}", sessionToken);
-        logger.info("AWS Region: {}", awsRegion);
+        String[] activeProfiles = environment.getActiveProfiles();
 
         BasicSessionCredentials sessionCredentials = new BasicSessionCredentials(
                 accessKey, secretKey, sessionToken);
 
+        if(activeProfiles[0].equals("test")) {
+            return AmazonDynamoDBClientBuilder.standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoEndpoint, awsRegion))
+                .withCredentials(new AWSStaticCredentialsProvider(sessionCredentials))
+                .build();
+        }
+
         return AmazonDynamoDBClientBuilder.defaultClient();
-                // .standard()
-                // // .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsDynamoEndpoint, awsRegion))
-                // .withCredentials(new AWSStaticCredentialsProvider(sessionCredentials))
-                // .withRegion(awsRegion)
-                // .build();
     }
 }

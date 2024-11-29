@@ -2,19 +2,14 @@
 name: CI/CD
 
 on:
-#  push:
-#    branches:
-#      - main
-#  # TODO: se pudermos provisionar mais máquinas, isso aqui faz sentido
-#  pull_request:
-#    branches:
-#      - main
-#    types:
-#      - closed
-  workflow_run:
-    workflows: ["BDD Tests"]
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
     types:
-      - completed
+      - closed
   workflow_dispatch:
     inputs:
       app_image_version:
@@ -24,6 +19,7 @@ on:
 
 jobs:
   check-aws-online:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
@@ -34,20 +30,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-# TODO:
-#      - name: Get RDS endpoint
-#        continue-on-error: true # if the DB is not set, we skip the remaining steps
-#        run: |
-#          DB_FOOD_CLIENT_HOST_NAME=$(aws rds describe-db-instances --db-instance-identifier ${{ secrets.DB_FOOD_CLIENTE_IDENTIFIER }} --query "DBInstances[0].Endpoint.Address" --output text)
-#          echo "DB_FOOD_CLIENT_HOST_NAME=$DB_FOOD_CLIENT_HOST_NAME" >> $GITHUB_ENV
-#
-#      - name: Check if .env.DB_FOOD_CLIENT_HOST_NAME was set
-#        run: |
-#          if [ -z "${{ env.DB_FOOD_CLIENT_HOST_NAME }}" ]; then
-#            echo "Verifique se subiu food-infra e se os recursos foram provisionados (razão: o banco de dados está fora do ar)."
-#            exit 1
-#          fi
 
   build-docker-image:
     runs-on: ubuntu-latest

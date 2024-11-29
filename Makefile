@@ -1,5 +1,5 @@
-build:
-	@echo "Building the application"
+compile:
+	@echo "Compile the application"
 	@mvn compile
 
 build-without-tests:
